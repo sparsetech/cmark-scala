@@ -1,4 +1,4 @@
-# cmark-scala
+# <img src="http://sparse.tech/opensource/icons/cmark.svg" width="50%">
 cmark-scala provides [Scala Native](http://www.scala-native.org/) bindings for [cmark](https://github.com/jgm/cmark). cmark allows to parse, manipulate and render CommonMark documents.
 
 The bindings were directly derived from [cmark.h](https://github.com/jgm/cmark/blob/master/src/cmark.h). Comments were retained and adapted if necessary. The naming of functions and their encapsulation follows Scala's conventions. Note that `*_new` functions were renamed to `create` as to prevent name collisions with the eponymous Scala keyword.
