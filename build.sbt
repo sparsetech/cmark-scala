@@ -14,18 +14,9 @@ lazy val cmark = (project in file("cmark"))
   .settings(commonSettings)
   .enablePlugins(ScalaNativePlugin)
 
-lazy val tests = (project in file("unit-tests"))
+lazy val tests = (project in file("tests"))
   .settings(
     libraryDependencies += "org.scala-native" %%% "test-interface" % "0.3.8",
-    testFrameworks += new TestFramework("tests.NativeFramework"),
-    envVars in (Test, test) ++= Map(
-      "USER"                           -> "scala-native",
-      "HOME"                           -> baseDirectory.value.getAbsolutePath,
-      "SCALA_NATIVE_ENV_WITH_EQUALS"   -> "1+1=2",
-      "SCALA_NATIVE_ENV_WITHOUT_VALUE" -> "",
-      "SCALA_NATIVE_ENV_WITH_UNICODE"  -> 0x2192.toChar.toString,
-      "SCALA_NATIVE_USER_DIR"          -> System.getProperty("user.dir")
-    )
+    testFrameworks += new TestFramework("tests.NativeFramework")
   ).dependsOn(cmark)
   .enablePlugins(ScalaNativePlugin)
-

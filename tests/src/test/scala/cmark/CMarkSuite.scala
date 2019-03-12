@@ -2,7 +2,7 @@ package cmark
 
 import scalanative.native._
 
-class CMarkSuite extends tests.Suite {
+object CMarkSuite extends tests.Suite {
   test("") {
     val msg: CString = c"Hello, world!"
     stdio.printf(msg)
