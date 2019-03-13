@@ -4,7 +4,7 @@ import scalanative.native._
 
 object CMarkSuite extends tests.Suite {
   test("Print version string of cmark") {
-    stdio.printf(cmark.versionString())
+    println("cmark version: " + fromCString(cmark.versionString()))
   }
 
   test("Example") {
