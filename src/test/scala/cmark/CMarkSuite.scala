@@ -1,9 +1,9 @@
 package cmark
 
-import minitest._
-import scalanative.native._
+import scalanative.unsafe._
+import scalanative.unsigned._
 
-object CMarkSuite extends SimpleTestSuite {
+object CMarkSuite extends munit.FunSuite {
   test("Print version string of cmark") {
     println("cmark version: " + fromCString(cmark.versionString()))
   }
@@ -42,7 +42,7 @@ object CMarkSuite extends SimpleTestSuite {
 
     Zone { implicit z =>
       val docNode = Parser.parseDocument(
-        toCString(test), test.length, Options.SourcePosition)
+        toCString(test), test.length.toULong, Options.SourcePosition)
       val iter = Iter.create(docNode)
       var evType = Iter.next(iter)
       while (evType != EventType.Done) {

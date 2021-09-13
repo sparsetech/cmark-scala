@@ -1,6 +1,6 @@
 package cmark
 
-import scala.scalanative.native._
+import scalanative.unsafe._
 
 @link("cmark")
 @extern
@@ -32,4 +32,3 @@ object cmark {
   @name("cmark_version_string")
   def versionString(): CString = extern
 }
-
