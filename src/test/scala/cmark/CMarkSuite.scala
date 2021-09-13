@@ -3,7 +3,7 @@ package cmark
 import scalanative.unsafe._
 import scalanative.unsigned._
 
-object CMarkSuite extends munit.FunSuite {
+class CMarkSuite extends munit.FunSuite {
   test("Print version string of cmark") {
     println("cmark version: " + fromCString(cmark.versionString()))
   }
