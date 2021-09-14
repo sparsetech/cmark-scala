@@ -1,4 +1,4 @@
-import scala.scalanative.native._
+import scalanative.unsafe._
 
 /**
   * ## Constants

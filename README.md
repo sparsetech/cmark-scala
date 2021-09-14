@@ -1,11 +1,13 @@
 # <img src="http://sparse.tech/icons/cmark.svg" width="50%">
-cmark-scala provides [Scala Native](http://www.scala-native.org/) bindings for [cmark](https://github.com/jgm/cmark). cmark allows to parse, manipulate and render CommonMark documents.
+cmark-scala provides [Scala Native](http://www.scala-native.org/) bindings for [cmark](https://github.com/commonmark/cmark). cmark allows to parse, manipulate and render CommonMark documents.
 
-The bindings were directly derived from [cmark.h](https://github.com/jgm/cmark/blob/master/src/cmark.h). Comments were retained and adapted if necessary. The naming of functions and their encapsulation follows Scala's conventions. Note that `*_new` functions were renamed to `create` as to prevent name collisions with the eponymous Scala keyword.
+The bindings were directly derived from [cmark.h](https://github.com/commonmark/cmark/blob/master/src/cmark.h). Comments were retained and adapted if necessary. The naming of functions and their encapsulation follows Scala's conventions. Note that `*_new` functions were renamed to `create` as to prevent name collisions with the eponymous Scala keyword.
 
 ## Example
 ```scala
 import cmark._
+import scalanative.unsafe._
+import scalanative.unsigned._
 
 var level = -1
 def onNode(eventType: EventType, node: Ptr[Node]): Unit = {
@@ -41,7 +43,7 @@ println("cmark version: " + fromCString(cmark.versionString()))
 println()
 
 val docNode = Parser.parseDocument(
-  toCString(test), test.length, Options.SourcePosition)
+  toCString(test), test.length.toULong, Options.SourcePosition)
 val iter = Iter.create(docNode)
 var evType = Iter.next(iter)
 while (evType != EventType.Done) {
@@ -89,7 +91,23 @@ document node @ 1-6
 
 ## Dependency
 ```scala
-libraryDependencies += "tech.sparse" %%  "cmark-scala" % "0.1.0-SNAPSHOT"
+libraryDependencies += "tech.sparse" %%  "cmark-scala" % "0.2.0-SNAPSHOT"
+```
+
+## Install Native Library
+In order to use this library you need to install `cmark` which installs `libcmark`.
+
+* macOS users can use the following command.
+
+```
+$ brew install cmark
+```
+
+* Linux/Ubuntu users can use the following commands.
+
+```
+$ sudo apt update
+$ sudo apt install cmark
 ```
 
 ## License

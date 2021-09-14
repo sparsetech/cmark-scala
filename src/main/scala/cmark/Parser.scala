@@ -1,7 +1,7 @@
 package cmark
 
-import scala.scalanative.native._
-import scala.scalanative.native.stdio.FILE
+import scalanative.unsafe._
+import scalanative.libc.stdio.FILE
 
 /**
   * ## Parsing
